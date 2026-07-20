@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hola</title>
-</head>
-<body>
-    
+{% extends "base.html" %}
+
+{% block title %} Landing page{% endblock title %}
+
+{% block content %}
     {% if name == "Pablo" %}
          <h1>¡Hola, profe!</h1>
          <h2>¡Hola, {{ name | title }}!</h2>
@@ -29,6 +25,5 @@
 
         {% endfor %}   
     </ul>
+{% endblock content %}
 
-</body>
-</html>
