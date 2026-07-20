@@ -6,9 +6,29 @@
     <title>Hola</title>
 </head>
 <body>
+    
+    {% if name == "Pablo" %}
+         <h1>¡Hola, profe!</h1>
+         <h2>¡Hola, {{ name | title }}!</h2>
+    {% elif name == "Fernando" %}
+        <h1>¡Hola, FernanGod! </h1>
+    {% endif %}
+        
     <h1>Hola a todos, desde este template</h1>
     <h2>Nombre: {{ name | upper }}</h2>
     <p>Edad: {{ age }}</p>
     <p>Fecha: {{ today | date:"d/m/Y"}} </p>
+
+    <p>Stack de tecnologías:</p>
+    <ul> 
+        {% for tool in stack %}
+            <li>{{ tool }}</li>
+        
+            {% empty %}
+        <li>no hay tecnologías disponibles</li>
+
+        {% endfor %}   
+    </ul>
+
 </body>
 </html>
