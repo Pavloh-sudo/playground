@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %} Frases del día {% endblock title %}
+
+{% block content %}
+
+<p>Frases según el día</p>
+
+
+        <li>
+            <ul>
+            {% for day in quote_day %}
+            <li>
+                <a href="{% url 'quote_day' day.dia %}">
+                    {{ day.dia }}
+                </a>
+            </li>
+ 
+            {% empty %}
+            <li> No hay tecnologías disponibles </li>
+            {% endfor %}
+            </ul>
+            
+                    
+        </li>
+  
+
+
+{% endblock content %}

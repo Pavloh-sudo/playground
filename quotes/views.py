@@ -1,4 +1,4 @@
-# from django.shortcuts import render
+from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse
 # Create your views here.
@@ -14,12 +14,34 @@ days_of_week = {
 }
 
 
+def quote(request):
+    quote_day = [
+        {"dia":"Lunes",
+        "frase":"Pienso, luego existo"},
+        {"dia":"Martes",
+        "frase":"La vida es un sueño"},
+        {"dia":"Miércoles",
+        "frase":"El conocimiento es poder"},
+        {"dia":"Jueves",
+        "frase":"Sé el cambio que quieres ver en el mundo"},
+        {"dia":"Viernes",
+        "frase":"Solo sé, que no sé nada"},
+        {"dia":"Sábado",
+        "frase":"Vive como si fuera el último día"},
+        {"dia":"Domingo",
+        "frase":"Da un poco más todos los días"},
+        ]
+    return render(request, "quotes/landing.html", {
+        "quote_day": quote_day
+    })
+
 def days_week(request, day):
     try:
         quote_text = days_of_week[day]
         return HttpResponse(quote_text)
     except KeyError:
         return HttpResponseNotFound("No hay frase para este día")
+    
     
 def index(request):
     list_items = ""
@@ -40,30 +62,3 @@ def days_week_with_number(request, day):
     redirect_day = days[day-1]
     redirect_path = reverse("day-quote",args=[redirect_day])
     return HttpResponseRedirect(redirect_path)
-
-
-def mont_of_the_year(request, month):
-
-    months_dict = {
-        "january": "Estamos en el mes de enero",
-        "february": "Estamos en el mes de febrero",
-        "march": "Estamos en el mes de marzo",
-        "april": "Estamos en el mes de abril",
-        "may": "Estamos en el mes de mayo",
-        "june": "Estamos en el mes de junio",
-        "july": "Estamos en el mes de julio",
-        "august": "Estamos en el mes de agosto",
-        "september": "Estamos en el mes de septiembre",
-        "october": "Estamos en el mes de octubre",
-        "november": "Estamos en el mes de noviembre",
-        "december": "Estamos en el mes de diciembre"
-    }
-
-    month_lower = month.lower()
-
-    quote_month = months_dict.get(month_lower, "Mes no válido o no encontrado")
-
-    return HttpResponse(quote_month)
-
-
-
